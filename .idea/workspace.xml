@@ -5,12 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8d0339b-c95c-45cb-9456-3809272d8eff" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/common/error/inicialize_struct_error.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/error/validate_error.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/domain/entity/order.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/usecase/adapter/repository/create_order_rest_api_adapter.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/usecase/interface/order_repository_interface.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/usecase/order/create.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/usecase/order/inicialize_struct_order.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repository/dto/create_pix_order_rest_api.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repository/rest/inicialize_struct_rest_repository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repository/rest/order.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/common/error/validate_error_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/core/domain/entity/order_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/core/domain/usecase/order/create_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
   </component>
   <component name="GOROOT" url="file:///usr/local/go" />
   <component name="Git.Settings">
@@ -24,27 +44,83 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jezsilva&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/Users/jezsilva"
   }
-}</component>
-  <component name="RunManager">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/repository" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/core/domain/entity" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Test.TestExecute in github.com/jeziel-francisco/live-donate/test/core/domain/usecase/order">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestExecute in github.com/jeziel-francisco/live-donate/test/core/domain/usecase/order" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="live-donate" />
+      <working_directory value="$PROJECT_DIR$/test/core/domain/usecase/order" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/jeziel-francisco/live-donate/test/core/domain/usecase/order" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestExecute\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestExecuteInvalidOrder in github.com/jeziel-francisco/live-donate/test/core/domain/usecase/order" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="live-donate" />
+      <working_directory value="$PROJECT_DIR$/test/core/domain/usecase/order" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/jeziel-francisco/live-donate/test/core/domain/usecase/order" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestExecuteInvalidOrder\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestValidate in github.com/jeziel-francisco/live-donate/test/core/domain/entity" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="live-donate" />
+      <working_directory value="$PROJECT_DIR$/test/core/domain/entity" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/jeziel-francisco/live-donate/test/core/domain/entity" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestValidate\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestValidateInvalidReceiverId in github.com/jeziel-francisco/live-donate/test/core/domain/entity" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="live-donate" />
+      <working_directory value="$PROJECT_DIR$/test/core/domain/entity" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/jeziel-francisco/live-donate/test/core/domain/entity" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestValidateInvalidReceiverId\E$" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
@@ -55,6 +131,26 @@
       <framework value="gotest" />
       <method v="2" />
     </configuration>
+    <configuration name="go test github.com/jeziel-francisco/live-donate/test/core/domain/entity" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="live-donate" />
+      <working_directory value="$PROJECT_DIR$/test/core/domain/entity" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/jeziel-francisco/live-donate/test/core/domain/entity" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Test.TestExecute in github.com/jeziel-francisco/live-donate/test/core/domain/usecase/order" />
+        <item itemvalue="Go Test.TestExecuteInvalidOrder in github.com/jeziel-francisco/live-donate/test/core/domain/usecase/order" />
+        <item itemvalue="Go Test.TestValidate in github.com/jeziel-francisco/live-donate/test/core/domain/entity" />
+        <item itemvalue="Go Test.TestValidateInvalidReceiverId in github.com/jeziel-francisco/live-donate/test/core/domain/entity" />
+        <item itemvalue="Go Test.go test github.com/jeziel-francisco/live-donate/test/core/domain/entity" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
@@ -73,5 +169,16 @@
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/test/core/domain/usecase/order/create_test.go</url>
+          <line>23</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
