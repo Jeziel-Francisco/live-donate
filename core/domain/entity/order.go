@@ -8,13 +8,13 @@ type OrderEntity struct {
 	ReceiverId string  `json:"receiver_id"`
 }
 
-func (o *OrderEntity) Validate() commonerror.ValidateError {
+func (o *OrderEntity) Validate() commonerror.BusinessError {
 	if o.Amount <= 0 {
-		return commonerror.NewValidateError("invalid amount", "order", 400)
+		return commonerror.NewBusinessError("invalid amount", "order", 400)
 	}
 
 	if len(o.ReceiverId) <= 0 {
-		return commonerror.NewValidateError("non-existent receiver", "order", 404)
+		return commonerror.NewBusinessError("non-existent receiver", "order", 404)
 	}
 
 	return nil

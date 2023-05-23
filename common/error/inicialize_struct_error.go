@@ -1,5 +1,5 @@
 package commonerror
 
-func NewValidateError(message string, entity string, code int64) ValidateError {
-	return &validateError{message, entity, code}
+func NewBusinessError(message string, entity string, code int64) BusinessError {
+	return &businessError{message, entity, code}
 }

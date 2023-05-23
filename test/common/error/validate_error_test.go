@@ -10,7 +10,7 @@ func TestNewValidateError(t *testing.T) {
 	messageError := "test"
 	entityError := "any"
 	var codeError int64 = 400
-	err := commonerror.NewValidateError(messageError, entityError, codeError)
+	err := commonerror.NewBusinessError(messageError, entityError, codeError)
 
 	if err == nil {
 		t.Errorf("Expected err")
