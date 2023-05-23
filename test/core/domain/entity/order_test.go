@@ -3,6 +3,7 @@ package testcoredomainentity
 import (
 	"testing"
 
+	commonerror "github.com/jeziel-francisco/live-donate/common/error"
 	coredomainentity "github.com/jeziel-francisco/live-donate/core/domain/entity"
 )
 
@@ -15,15 +16,17 @@ func TestValidateInvalidAmount(t *testing.T) {
 		t.Errorf("Expected err")
 	}
 
-	if err.Error() != "invalid amount" {
+	businessError := err.(commonerror.BusinessError)
+
+	if businessError.Error() != "invalid amount" {
 		t.Errorf("invalid message")
 	}
 
-	if err.Entity() != "order" {
+	if businessError.Entity() != "order" {
 		t.Errorf("invalid entity")
 	}
 
-	if err.Code() != 400 {
+	if businessError.Code() != 400 {
 		t.Errorf("invalid code")
 	}
 }
@@ -37,15 +40,17 @@ func TestValidateInvalidReceiverId(t *testing.T) {
 		t.Errorf("Expected err")
 	}
 
-	if err.Error() != "non-existent receiver" {
+	businessError := err.(commonerror.BusinessError)
+
+	if businessError.Error() != "non-existent receiver" {
 		t.Errorf("invalid message")
 	}
 
-	if err.Entity() != "order" {
+	if businessError.Entity() != "order" {
 		t.Errorf("invalid entity")
 	}
 
-	if err.Code() != 404 {
+	if businessError.Code() != 404 {
 		t.Errorf("invalid code")
 	}
 }

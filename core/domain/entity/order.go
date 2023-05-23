@@ -6,9 +6,10 @@ type OrderEntity struct {
 	Amount     float64 `json:"amount"`
 	Message    string  `json:"message"`
 	ReceiverId string  `json:"receiver_id"`
+	QrCode     string  `json:"qr_code"`
 }
 
-func (o *OrderEntity) Validate() commonerror.BusinessError {
+func (o *OrderEntity) Validate() error {
 	if o.Amount <= 0 {
 		return commonerror.NewBusinessError("invalid amount", "order", 400)
 	}
@@ -18,4 +19,8 @@ func (o *OrderEntity) Validate() commonerror.BusinessError {
 	}
 
 	return nil
+}
+
+func (o *OrderEntity) SetQrCode(qrCode string) {
+	o.QrCode = qrCode
 }
