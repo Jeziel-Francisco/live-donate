@@ -1,4 +1,4 @@
-package usecaseadapterrepository
+package coreadapter
 
 import (
 	coredomainentity "github.com/jeziel-francisco/live-donate/core/domain/entity"

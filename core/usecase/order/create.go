@@ -1,8 +1,8 @@
 package coreusecaseorder
 
 import (
+	coreadapter "github.com/jeziel-francisco/live-donate/core/adapter"
 	coredomainentity "github.com/jeziel-francisco/live-donate/core/domain/entity"
-	usecaseadapterrepository "github.com/jeziel-francisco/live-donate/core/usecase/adapter/repository"
 	usecaseinterface "github.com/jeziel-francisco/live-donate/core/usecase/interface"
 )
 
@@ -15,6 +15,5 @@ func (c *createOrder) Execute(entity coredomainentity.OrderEntity) error {
 	if err != nil {
 		return err
 	}
-
-	return c.orderRepository.Create(usecaseadapterrepository.EntityOrderToCreateOrderRestApiDto(entity))
+	return c.orderRepository.Create(coreadapter.EntityOrderToCreateOrderRestApiDto(entity))
 }
