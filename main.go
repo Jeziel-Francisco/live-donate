@@ -7,7 +7,8 @@ import (
 
 func main() {
 	pingController := corecontroller.NewPingController()
-	routeGin := infrahttpgin.NewRouteGin(pingController)
+	createOrderController := corecontroller.NewCreateOrderController()
+	routeGin := infrahttpgin.NewRouteGin(pingController, createOrderController)
 	serverGin := infrahttpgin.NewServerGinHttp(routeGin)
 	serverGin.Run()
 }

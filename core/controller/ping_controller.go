@@ -1,6 +1,6 @@
 package corecontroller
 
-func NewPingController() *PingController {
+func NewPingController() Controller {
 	return &PingController{}
 }
 
