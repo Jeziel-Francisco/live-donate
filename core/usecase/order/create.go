@@ -7,16 +7,23 @@ import (
 	usecaseinterface "github.com/jeziel-francisco/live-donate/core/usecase/interface"
 )
 
-func NewCreateOrderUseCase(orderRestRepository usecaseinterface.OrderRestRepository, orderDatabaseRepository usecaseinterface.OrderDatabaseRespository) *createOrder {
+const (
+	pubCreateOrderTopicName = "create_order_event"
+)
+
+func NewCreateOrderUseCase(orderRestRepository usecaseinterface.OrderRestRepository,
+	orderDatabaseRepository usecaseinterface.OrderDatabaseRespository, messengerRepository usecaseinterface.MessengerRepository) *createOrder {
 	return &createOrder{
 		orderRestRepository:     orderRestRepository,
 		orderDatabaseRepository: orderDatabaseRepository,
+		messengerRepository:     messengerRepository,
 	}
 }
 
 type createOrder struct {
 	orderRestRepository     usecaseinterface.OrderRestRepository
 	orderDatabaseRepository usecaseinterface.OrderDatabaseRespository
+	messengerRepository     usecaseinterface.MessengerRepository
 }
 
 func (c *createOrder) Execute(entity coredomainentity.OrderEntity) (*corecontrollerdto.OutputCreateOrder, error) {
@@ -30,7 +37,12 @@ func (c *createOrder) Execute(entity coredomainentity.OrderEntity) (*corecontrol
 	}
 	entity.SetQrCode(qrcode)
 
-	c.orderDatabaseRepository.Save(coreadapter.EntityOrderToDatabaseRepositoryOrder(entity))
+	err = c.orderDatabaseRepository.Save(coreadapter.EntityOrderToDatabaseRepositoryOrder(entity))
+	if err != nil {
+		return nil, err
+	}
+
+	err = c.messengerRepository.SendTopic(entity, pubCreateOrderTopicName)
 	if err != nil {
 		return nil, err
 	}

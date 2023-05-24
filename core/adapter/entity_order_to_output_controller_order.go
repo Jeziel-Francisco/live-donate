@@ -6,5 +6,5 @@ import (
 )
 
 func EntityOrderToControllerOrder(entity coredomainentity.OrderEntity) *corecontrollerdto.OutputCreateOrder {
-	return &corecontrollerdto.OutputCreateOrder{}
+	return &corecontrollerdto.OutputCreateOrder{QrCode: entity.QrCode}
 }
