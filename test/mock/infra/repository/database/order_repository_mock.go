@@ -1,15 +1,19 @@
 package testmockinfrarepositorydatabase
 
-import infrarepositorydto "github.com/jeziel-francisco/live-donate/infra/repository/dto"
+import (
+	coredomainentity "github.com/jeziel-francisco/live-donate/core/domain/entity"
+	infrarepositorydto "github.com/jeziel-francisco/live-donate/infra/repository/dto"
+)
 
-func NewOrderDatabaseMock(saveError error) *OrderDatabaseMock {
-	return &OrderDatabaseMock{saveError: saveError}
+func NewOrderDatabaseMock(saveSuccess coredomainentity.OrderEntity, saveError error) *OrderDatabaseMock {
+	return &OrderDatabaseMock{saveSuccess: saveSuccess, saveError: saveError}
 }
 
 type OrderDatabaseMock struct {
-	saveError error
+	saveSuccess coredomainentity.OrderEntity
+	saveError   error
 }
 
-func (rest *OrderDatabaseMock) Save(order infrarepositorydto.InputSaveOrderDatabaseDto) error {
-	return rest.saveError
+func (rest *OrderDatabaseMock) Save(order infrarepositorydto.InputSaveOrderDatabaseDto) (coredomainentity.OrderEntity, error) {
+	return rest.saveSuccess, rest.saveError
 }

@@ -1,6 +1,10 @@
-package infrarespositorymemory
+package infrarepositorymemory
 
-import infrarepositorydto "github.com/jeziel-francisco/live-donate/infra/repository/dto"
+import (
+	coreadapter "github.com/jeziel-francisco/live-donate/core/adapter"
+	coredomainentity "github.com/jeziel-francisco/live-donate/core/domain/entity"
+	infrarepositorydto "github.com/jeziel-francisco/live-donate/infra/repository/dto"
+)
 
 func NewOrderDatabaseMemory() *OrderDatabaseMemory {
 	return &OrderDatabaseMemory{}
@@ -9,6 +13,6 @@ func NewOrderDatabaseMemory() *OrderDatabaseMemory {
 type OrderDatabaseMemory struct {
 }
 
-func (rest *OrderDatabaseMemory) Save(order infrarepositorydto.InputSaveOrderDatabaseDto) error {
-	return nil
+func (rest *OrderDatabaseMemory) Save(order infrarepositorydto.InputSaveOrderDatabaseDto) (coredomainentity.OrderEntity, error) {
+	return coreadapter.DatabaseRepositorySaveOrderToEntityOrder(infrarepositorydto.OutputSaveOrderDatabaseDto{}), nil
 }

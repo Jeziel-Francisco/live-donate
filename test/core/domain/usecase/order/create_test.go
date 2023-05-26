@@ -12,7 +12,7 @@ import (
 )
 
 func TestExecuteInvalidOrder(t *testing.T) {
-	order := coredomainentity.OrderEntity{Amount: 0, ReceiverId: "1"}
+	order := coredomainentity.OrderEntity{Amount: 0, ReceiverID: "1"}
 	createOrderUseCase := coreusecaseorder.NewCreateOrderUseCase(nil, nil, nil)
 	_, err := createOrderUseCase.Execute(order)
 	if err == nil {
@@ -21,30 +21,30 @@ func TestExecuteInvalidOrder(t *testing.T) {
 }
 
 func TestExecuteCreateOrderError(t *testing.T) {
-	order := coredomainentity.OrderEntity{Amount: 0, ReceiverId: "1"}
-	orderRestMock := testmockinfrarepositoryrest.NewOrderRestMock("", errors.New("errror"))
+	inputOrderUseCase := coredomainentity.OrderEntity{Amount: 0, ReceiverID: "1"}
+	orderRestMock := testmockinfrarepositoryrest.NewOrderRestMock(coredomainentity.OrderEntity{}, errors.New("errror"))
 	createOrderUseCase := coreusecaseorder.NewCreateOrderUseCase(orderRestMock, nil, nil)
-	_, err := createOrderUseCase.Execute(order)
+	_, err := createOrderUseCase.Execute(inputOrderUseCase)
 	if err == nil {
 		t.Errorf("expected error")
 	}
 }
 
 func TestExecuteSaveOrderError(t *testing.T) {
-	order := coredomainentity.OrderEntity{Amount: 100, ReceiverId: "1"}
-	orderRestMock := testmockinfrarepositoryrest.NewOrderRestMock("qrcode", nil)
-	orderDatabaseMock := testmockinfrarepositorydatabase.NewOrderDatabaseMock(errors.New("error"))
+	inputOrderUseCase := coredomainentity.OrderEntity{Amount: 100, ReceiverID: "1"}
+	orderRestMock := testmockinfrarepositoryrest.NewOrderRestMock(coredomainentity.OrderEntity{}, nil)
+	orderDatabaseMock := testmockinfrarepositorydatabase.NewOrderDatabaseMock(coredomainentity.OrderEntity{}, errors.New("error"))
 	createOrderUseCase := coreusecaseorder.NewCreateOrderUseCase(orderRestMock, orderDatabaseMock, nil)
-	_, err := createOrderUseCase.Execute(order)
+	_, err := createOrderUseCase.Execute(inputOrderUseCase)
 	if err == nil {
 		t.Errorf("expected error")
 	}
 }
 
 func TestExecuteSendTopicError(t *testing.T) {
-	order := coredomainentity.OrderEntity{Amount: 100, ReceiverId: "1"}
-	orderRestMock := testmockinfrarepositoryrest.NewOrderRestMock("qrcode", nil)
-	orderDatabaseMock := testmockinfrarepositorydatabase.NewOrderDatabaseMock(nil)
+	order := coredomainentity.OrderEntity{Amount: 100, ReceiverID: "1"}
+	orderRestMock := testmockinfrarepositoryrest.NewOrderRestMock(coredomainentity.OrderEntity{}, nil)
+	orderDatabaseMock := testmockinfrarepositorydatabase.NewOrderDatabaseMock(coredomainentity.OrderEntity{}, nil)
 	pubSubMock := testmockinfrarepositorypubsub.NewMessageMock(errors.New(""), nil)
 	createOrderUseCase := coreusecaseorder.NewCreateOrderUseCase(orderRestMock, orderDatabaseMock, pubSubMock)
 	_, err := createOrderUseCase.Execute(order)
@@ -54,12 +54,28 @@ func TestExecuteSendTopicError(t *testing.T) {
 }
 
 func TestExecute(t *testing.T) {
-	order := coredomainentity.OrderEntity{Amount: 100, ReceiverId: "1"}
-	orderRestMock := testmockinfrarepositoryrest.NewOrderRestMock("qrcode", nil)
-	orderDatabaseMock := testmockinfrarepositorydatabase.NewOrderDatabaseMock(nil)
+	inputOrderUseCase := coredomainentity.OrderEntity{Amount: 100, ReceiverID: "1"}
+	outputOrderRest := coredomainentity.OrderEntity{
+		Amount:        100,
+		ReceiverID:    "1",
+		QrCode:        "Teste",
+		ExternalID:    "1",
+		TransactionID: "1",
+	}
+	outputOrderDatabase := coredomainentity.OrderEntity{
+		Amount:        100,
+		ReceiverID:    "1",
+		Message:       "Teste",
+		QrCode:        "Teste",
+		ID:            "1",
+		ExternalID:    "1",
+		TransactionID: "1",
+	}
+	orderRestMock := testmockinfrarepositoryrest.NewOrderRestMock(outputOrderRest, nil)
+	orderDatabaseMock := testmockinfrarepositorydatabase.NewOrderDatabaseMock(outputOrderDatabase, nil)
 	pubSubMock := testmockinfrarepositorypubsub.NewMessageMock(nil, nil)
 	createOrderUseCase := coreusecaseorder.NewCreateOrderUseCase(orderRestMock, orderDatabaseMock, pubSubMock)
-	output, err := createOrderUseCase.Execute(order)
+	output, err := createOrderUseCase.Execute(inputOrderUseCase)
 	if err != nil {
 		t.Errorf("unexpected error")
 	}

@@ -1,7 +1,10 @@
 package usecaseinterface
 
-import infrarepositorydto "github.com/jeziel-francisco/live-donate/infra/repository/dto"
+import (
+	coredomainentity "github.com/jeziel-francisco/live-donate/core/domain/entity"
+	infrarepositorydto "github.com/jeziel-francisco/live-donate/infra/repository/dto"
+)
 
-type OrderDatabaseRespository interface {
-	Save(order infrarepositorydto.InputSaveOrderDatabaseDto) error
+type OrderDatabaseRepository interface {
+	Save(order infrarepositorydto.InputSaveOrderDatabaseDto) (coredomainentity.OrderEntity, error)
 }

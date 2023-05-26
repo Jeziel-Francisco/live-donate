@@ -6,9 +6,9 @@ import (
 )
 
 func EntityOrderToRestRepositoryOrder(entity coredomainentity.OrderEntity) infrarepositorydto.InputCreateOrderRestApiDto {
-	return infrarepositorydto.InputCreateOrderRestApiDto{ReceiverId: entity.ReceiverId, TotalAmount: entity.Amount}
+	return infrarepositorydto.InputCreateOrderRestApiDto{ReceiverID: entity.ReceiverID, TotalAmount: entity.Amount}
 }
 
 func EntityOrderToDatabaseRepositoryOrder(entity coredomainentity.OrderEntity) infrarepositorydto.InputSaveOrderDatabaseDto {
-	return infrarepositorydto.InputSaveOrderDatabaseDto{Amount: entity.Amount, Message: entity.Message, ReceiverId: entity.ReceiverId, QrCode: entity.QrCode}
+	return infrarepositorydto.InputSaveOrderDatabaseDto{Amount: entity.Amount, Message: entity.Message, ReceiverID: entity.ReceiverID, QrCode: entity.QrCode}
 }

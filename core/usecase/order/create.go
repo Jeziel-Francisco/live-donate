@@ -12,7 +12,7 @@ const (
 )
 
 func NewCreateOrderUseCase(orderRestRepository usecaseinterface.OrderRestRepository,
-	orderDatabaseRepository usecaseinterface.OrderDatabaseRespository, messengerRepository usecaseinterface.MessengerRepository) *createOrder {
+	orderDatabaseRepository usecaseinterface.OrderDatabaseRepository, messengerRepository usecaseinterface.MessengerRepository) *createOrder {
 	return &createOrder{
 		orderRestRepository:     orderRestRepository,
 		orderDatabaseRepository: orderDatabaseRepository,
@@ -22,7 +22,7 @@ func NewCreateOrderUseCase(orderRestRepository usecaseinterface.OrderRestReposit
 
 type createOrder struct {
 	orderRestRepository     usecaseinterface.OrderRestRepository
-	orderDatabaseRepository usecaseinterface.OrderDatabaseRespository
+	orderDatabaseRepository usecaseinterface.OrderDatabaseRepository
 	messengerRepository     usecaseinterface.MessengerRepository
 }
 
@@ -31,16 +31,19 @@ func (c *createOrder) Execute(entity coredomainentity.OrderEntity) (*corecontrol
 	if err != nil {
 		return nil, err
 	}
-	qrcode, err := c.orderRestRepository.Create(coreadapter.EntityOrderToRestRepositoryOrder(entity))
+	entityResult, err := c.orderRestRepository.Create(coreadapter.EntityOrderToRestRepositoryOrder(entity))
 	if err != nil {
 		return nil, err
 	}
-	entity.SetQrCode(qrcode)
+	entity.SetQrCode(entityResult.QrCode)
+	entity.SetExternalID(entityResult.ExternalID)
+	entity.SetTransactionID(entityResult.TransactionID)
 
-	err = c.orderDatabaseRepository.Save(coreadapter.EntityOrderToDatabaseRepositoryOrder(entity))
+	entityResult, err = c.orderDatabaseRepository.Save(coreadapter.EntityOrderToDatabaseRepositoryOrder(entity))
 	if err != nil {
 		return nil, err
 	}
+	entity.SetID(entityResult.ID)
 
 	err = c.messengerRepository.SendTopic(entity, pubCreateOrderTopicName)
 	if err != nil {

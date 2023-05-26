@@ -31,7 +31,7 @@ func TestValidateInvalidAmount(t *testing.T) {
 	}
 }
 
-func TestValidateInvalidReceiverId(t *testing.T) {
+func TestValidateInvalidReceiverID(t *testing.T) {
 	order := coredomainentity.OrderEntity{Amount: 100}
 
 	err := order.Validate()
@@ -56,7 +56,7 @@ func TestValidateInvalidReceiverId(t *testing.T) {
 }
 
 func TestValidate(t *testing.T) {
-	order := coredomainentity.OrderEntity{Amount: 100, ReceiverId: "100", Message: "test"}
+	order := coredomainentity.OrderEntity{Amount: 100, ReceiverID: "100", Message: "test"}
 
 	err := order.Validate()
 
